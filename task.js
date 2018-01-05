@@ -57,6 +57,8 @@ request(url, function (error, response, body) {
     } else {
       console.log(count + " commit(s) today");
     } 
+  } else {
+    console.log("Status isn't 200.", error, response, body, url);
   }
 });
 

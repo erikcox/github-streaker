@@ -15,8 +15,12 @@ console.log("Variables: ", GITHUB_USERNAME, SENDGRID_USERNAME, TO, FROM)
 var request   = require('request');
 var sendgrid  = require('sendgrid')(SENDGRID_USERNAME, SENDGRID_PASSWORD);
 
-var url = "https://api.github.com/users/" +GITHUB_USERNAME + "/events/public";
-console.log("URL: ", url);
+var request_options = {
+  url: 'https://api.github.com/users/' + GITHUB_USERNAME + '/events/public',
+  headers: {
+    'User-Agent': 'request'
+  }
+};
 
 function warnOfImpendingStreakDoom() {
   console.log("Attempting to send email");
@@ -31,14 +35,7 @@ function warnOfImpendingStreakDoom() {
   });
 }
 
-var options = {
-  url: 'https://api.github.com/users/erikcox/events/public',
-  headers: {
-    'User-Agent': 'request'
-  }
-};
-
-request(options, function (error, response, body) {
+request(request_options, function (error, response, body) {
   console.log("Starting request with status: ", response.statusCode);
   if (!error && response.statusCode == 200) {
     console.log("Status 200");
@@ -57,6 +54,7 @@ request(options, function (error, response, body) {
         }
     }
 
+    // TODO: change the count back to zero for email and remove excess logs
     // if (count <= 0) {
     console.log("Count: ", count);
     if (count === 1) {

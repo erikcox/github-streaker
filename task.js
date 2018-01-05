@@ -12,7 +12,7 @@ var FROM              = process.env.FROM || TO;
 var request   = require('request');
 var sendgrid  = require('sendgrid')(SENDGRID_USERNAME, SENDGRID_PASSWORD);
 
-var url = "https://github.com/users/"+GITHUB_USERNAME+"/contributions_calendar_data";
+var url = "https://github.com/users/"+GITHUB_USERNAME+"/contributions";
 
 function commit_count(commit) {
   return commit[1];

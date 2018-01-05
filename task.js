@@ -30,6 +30,7 @@ function warnOfImpendingStreakDoom() {
 
 request(url, function (error, response, body) {
   if (!error && response.statusCode == 200) {
+    console.log("Status 200");
     var json = JSON.parse(body);
     var today = new Date().getUTCDate();
     var count = 0;
@@ -46,6 +47,7 @@ request(url, function (error, response, body) {
     }
 
     // if (count <= 0) {
+    console.log("Count: ", count);
     if (count === 1) {
       warnOfImpendingStreakDoom();
     } else {
@@ -54,3 +56,4 @@ request(url, function (error, response, body) {
   }
 });
 
+console.log("Goodbye!")

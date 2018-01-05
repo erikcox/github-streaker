@@ -12,11 +12,7 @@ var FROM              = process.env.FROM || TO;
 var request   = require('request');
 var sendgrid  = require('sendgrid')(SENDGRID_USERNAME, SENDGRID_PASSWORD);
 
-var url = "https://github.com/users/"+GITHUB_USERNAME+"/contributions";
-
-function commit_count(commit) {
-  return commit[1];
-}
+var url = `https://api.github.com/users/${GITHUB_USERNAME}/events/public`;
 
 function warnOfImpendingStreakDoom() {
   sendgrid.send({
@@ -32,12 +28,21 @@ function warnOfImpendingStreakDoom() {
 
 request(url, function (error, response, body) {
   if (!error && response.statusCode == 200) {
-    var json = JSON.parse(body); 
-    // I think I'm going to have to do something here with timezones here. Maybe GitHub handles this already though based on user.
-    var most_recent         = json[json.length-1];
-    var second_most_recent  = json[json.length-2];
+    var json = JSON.parse(body);
+    var today = new Date().getUTCDate();
+    var count = 0;
 
-    var count = commit_count(most_recent);
+    for (key in json) {
+        if (json.hasOwnProperty(key)) {
+          if (json[key].type === "PushEvent") {
+            var date = new Date(json[key].created_at).getUTCDate();
+            if (date === today) {
+              count++;
+            }
+          }
+        }
+    }
+
     if (count <= 0) {
       warnOfImpendingStreakDoom();
     } else {

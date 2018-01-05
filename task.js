@@ -12,7 +12,7 @@ var FROM              = process.env.FROM || TO;
 var request   = require('request');
 var sendgrid  = require('sendgrid')(SENDGRID_USERNAME, SENDGRID_PASSWORD);
 
-var url = `https://api.github.com/users/${GITHUB_USERNAME}/events/public`;
+var url = "https://api.github.com/users/" +GITHUB_USERNAME + "/events/public";
 
 function warnOfImpendingStreakDoom() {
   sendgrid.send({

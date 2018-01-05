@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+console.log("Starting Github Streaker!");
+
 var dotenv  = require('dotenv');
 dotenv.load();
 
@@ -43,6 +45,7 @@ request(url, function (error, response, body) {
         }
     }
 
+    // if (count <= 0) {
     if (count === 1) {
       warnOfImpendingStreakDoom();
     } else {

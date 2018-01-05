@@ -10,7 +10,6 @@ var SENDGRID_USERNAME = process.env.SENDGRID_USERNAME;
 var SENDGRID_PASSWORD = process.env.SENDGRID_PASSWORD;
 var TO                = process.env.TO;
 var FROM              = process.env.FROM || TO;
-console.log("Variables: ", GITHUB_USERNAME, SENDGRID_USERNAME, TO, FROM)
 
 var request   = require('request');
 var sendgrid  = require('sendgrid')(SENDGRID_USERNAME, SENDGRID_PASSWORD);
@@ -23,7 +22,7 @@ var request_options = {
 };
 
 function warnOfImpendingStreakDoom() {
-  console.log("Attempting to send email");
+  console.log("Attempting to send email...");
   sendgrid.send({
     to:       TO,
     from:     FROM,
@@ -54,17 +53,13 @@ request(request_options, function (error, response, body) {
         }
     }
 
-    // TODO: change the count back to zero for email and remove excess logs
-    // if (count <= 0) {
     console.log("Count: ", count);
-    if (count === 1) {
+    if (count <= 0) {
       warnOfImpendingStreakDoom();
     } else {
       console.log(count + " commit(s) today");
     } 
   } else {
-    console.log("Status isn't 200.", error, body, url);
+    console.log("Status isn't 200. ", body, url);
   }
 });
-
-console.log("Goodbye!")

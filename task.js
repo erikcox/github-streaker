@@ -10,13 +10,16 @@ var SENDGRID_USERNAME = process.env.SENDGRID_USERNAME;
 var SENDGRID_PASSWORD = process.env.SENDGRID_PASSWORD;
 var TO                = process.env.TO;
 var FROM              = process.env.FROM || TO;
+console.log("Variables: ", GITHUB_USERNAME, SENDGRID_USERNAME, TO, FROM)
 
 var request   = require('request');
 var sendgrid  = require('sendgrid')(SENDGRID_USERNAME, SENDGRID_PASSWORD);
 
 var url = "https://api.github.com/users/" +GITHUB_USERNAME + "/events/public";
+console.log("URL: ", url);
 
 function warnOfImpendingStreakDoom() {
+  console.log("Attempting to send email");
   sendgrid.send({
     to:       TO,
     from:     FROM,
@@ -29,6 +32,7 @@ function warnOfImpendingStreakDoom() {
 }
 
 request(url, function (error, response, body) {
+  console.log("Starting request with status: ", response.statusCode);
   if (!error && response.statusCode == 200) {
     console.log("Status 200");
     var json = JSON.parse(body);

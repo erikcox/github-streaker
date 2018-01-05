@@ -43,7 +43,7 @@ request(url, function (error, response, body) {
         }
     }
 
-    if (count <= 0) {
+    if (count === 1) {
       warnOfImpendingStreakDoom();
     } else {
       console.log(count + " commit(s) today");

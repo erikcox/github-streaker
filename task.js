@@ -31,7 +31,14 @@ function warnOfImpendingStreakDoom() {
   });
 }
 
-request(url, function (error, response, body) {
+var options = {
+  url: 'https://api.github.com/users/erikcox/events/public',
+  headers: {
+    'User-Agent': 'request'
+  }
+};
+
+request(options, function (error, response, body) {
   console.log("Starting request with status: ", response.statusCode);
   if (!error && response.statusCode == 200) {
     console.log("Status 200");
@@ -58,7 +65,7 @@ request(url, function (error, response, body) {
       console.log(count + " commit(s) today");
     } 
   } else {
-    console.log("Status isn't 200.", error, response, body, url);
+    console.log("Status isn't 200.", error, body, url);
   }
 });
 

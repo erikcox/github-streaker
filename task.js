@@ -26,7 +26,7 @@ function warnOfImpendingStreakDoom(m) {
     to:       TO,
     from:     FROM,
     subject:  "[github-streaker] Don't break the streak.",
-    text:     `${m}\nYour GitHub streak is about to break. Go and make a commit quick!\n`
+    text:     `${m}\nYour GitHub streak is about to break. Go and make a commit quick!`
   }, function(err, json) {
     if (err) { return console.error(err); }
   });

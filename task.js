@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+console.log("Starting app");
 var dotenv  = require('dotenv');
 var parse = require("github-calendar-parser");
 var request   = require('request');
@@ -33,14 +33,14 @@ function warnOfImpendingStreakDoom(m) {
 }
 
 request(request_options, function (error, response, body) {
-
+  console.log(`Options: ${request_options} Status: response.statusCode`);
   if (!error && response.statusCode == 200) {
     var contributions = parse(body);
     var today = new Date().toISOString().split('T')[0];
 
     var todays_count = contributions.days.find(o => o.date.toISOString().split('T')[0] === today)  || 0;
     var message = `Your current streak is ${contributions.current_streak} days. Your longest streak is ${contributions.longest_streak} days.`;
-
+    console.log(`Today's count ${todays_count}`);
     if (todays_count <= 0) {
       warnOfImpendingStreakDoom(message);
     }

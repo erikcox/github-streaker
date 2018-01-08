@@ -36,9 +36,7 @@ request(request_options, function (error, response, body) {
   console.log(`Options: ${request_options.url} Status: ${response.statusCode}`);
   if (!error && response.statusCode == 200) {
     var contributions = parse(body);
-    console.log(contributions);
     var today = new Date().toISOString().split('T')[0];
-
     var today_obj = contributions.days.find(o => o.date.toISOString().split('T')[0] === today) || 0;
     console.log(today_obj.count);
     var message = `Your current streak is ${contributions.current_streak} days. Your longest streak is ${contributions.longest_streak} days.`;

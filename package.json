@@ -8,10 +8,13 @@
   "main": "task.js",
   "description": "Reminds you not to stop your streak on GitHub.",
   "dependencies": {
-    "dotenv": "0.2.3",
+    "dotenv": "^0.2.3",
+    "github-calendar-parser": "^1.1.9",
     "moment": "2.4.0",
-    "request": "2.21.0",
-    "sendgrid": "0.3.1"
+    "request": "^2.21.0",
+    "sendgrid": "^0.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.8"
   }
 }
-

@@ -12,7 +12,7 @@ var SENDGRID_USERNAME = process.env.SENDGRID_USERNAME;
 var SENDGRID_PASSWORD = process.env.SENDGRID_PASSWORD;
 var TO                = process.env.TO;
 var FROM              = process.env.FROM || TO;
-
+console.log(SENDGRID_USERNAME, SENDGRID_PASSWORD);
 var request_options = {
   url: 'https://github.com/users/' + GITHUB_USERNAME + '/contributions',
   headers: {
